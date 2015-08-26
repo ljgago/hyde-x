@@ -1,14 +1,30 @@
 {{ partial "head.html" . }}
 <div class="content container">
+<h2>Related articles: </h2>
   <ul class="posts">
-  {{ range .Data.Pages }}
-    <li><a href="{{ .Permalink }}">{{ .Title }}</a>
-    {{ if isset .Params "categories" }}
-    &middot;
-    {{ range .Params.categories }}<a class="label" href="{{ "/categories/" | absURL }}{{ . | urlize }}">{{ . }}</a>{{ end }}
-    {{ end }}</span>
-    &middot; <time>{{ .Date.Format "Jan 2, 2006" }}</time></li>
+    {{ range .Data.Pages }}
+    {{ if eq .Type "post"}}
+    <li>
+        <time><span id="{{ .Title}}" data-fecha='{{ .Date }}'></span></time> : <a href="{{ .Permalink }}">{{ .Title }}</a>
+        {{ if isset .Params "categories" }}
+            - {{ range .Params.categories }}<a href="{{ "/categories/" | absURL }}{{ . | urlize }}">#{{ . }}</a> {{ end }}
+        {{ end }}</span>
+    </li>
+    {{ end }}
   {{ end }}
   </ul>
 </div>
+
+{{ range .Data.Pages }}
+{{ if eq .Type "post"}}
+<script type="text/javascript">
+  (function () {
+    moment.locale('{{ if isset .Site.Params "languageText" }}{{ .Site.Params.languageText }}{{ else }}us{{ end }}');
+    var postHTML = document.getElementById('{{ .Title }}');
+    var postDate = moment({{ .Date }}, "YYYY-MM-DD HH:mm Z");
+    postHTML.innerHTML = postDate.format("LL");
+  }());
+</script>
+{{ end }}
+{{ end }}
 {{ partial "foot.html" . }}

@@ -7,7 +7,7 @@
       <h1 class="post-title">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h1>
-      <span class="post-date">{{ .Date.Format "Jan 2, 2006" }} &middot; {{ .ReadingTime }} minute read{{ if .Site.DisqusShortname }} &middot; <a href="{{ .Permalink }}#disqus_thread">Comments</a>{{ end }}
+      <span class="post-date"><i class="fa fa-calendar-o"></i> <span id="{{ .Title }}"></span> &middot; {{ .ReadingTime }} {{ if isset .Site.Params "minuteRead" }}{{ .Site.Params.minuteRead }}{{else}}minute read{{end}}{{ if .Site.DisqusShortname }} &middot; <a href="{{ .Permalink }}#disqus_thread">{{ .Site.Params.disqusComments }}</a>{{ end }}
       {{ if isset .Params "categories" }}
       <br/>
       {{ range .Params.categories }}<a class="label" href="{{ "/categories/" | absURL }}{{ . | urlize }}">{{ . }}</a>{{ end }}
@@ -15,11 +15,11 @@
       {{ if eq .Site.Params.truncate false }}
       {{ .Content }}
       {{ else if .Description }}
-      <p>{{ .Description }}</p>
-      <a href="{{ .Permalink }}">Read On &rarr;</a>
+      <p>{{ .Description }}</p><br>
+      <a href="{{ .Permalink }}">{{.Site.Params.readOn}} &rarr;</a>
       {{ else }}
-      {{ .Summary }}
-      {{ if .Truncated }}<a href="{{ .Permalink }}">Read On &rarr;</a>{{ end }}
+      {{ .Summary }}<br>
+      {{ if .Truncated }}<a href="{{ .Permalink }}">{{ if isset .Site.Params "readOn"}}{{ .Site.Params.readOn }}{{ else }}Read On{{ end }} &rarr;</a>{{ end }}
       {{ end }}
     </div>
     {{ end }}
@@ -29,13 +29,26 @@
 
 {{ with .Site.DisqusShortname }}
 <script type="text/javascript">
-var disqus_shortname = {{ . }};
-(function () {
+  var disqus_shortname = {{ . }};
+  (function () {
     var s = document.createElement('script'); s.async = true;
     s.type = 'text/javascript';
     s.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-}());
+  }());
 </script>
+{{ end }}
+
+{{ range .Data.Pages }}
+{{ if eq .Type "post"}}
+<script type="text/javascript">
+  (function () {
+    moment.locale('{{ if isset .Site.Params "languageText" }}{{ .Site.Params.languageText }}{{ else }}us{{ end }}');
+    var postHTML = document.getElementById('{{ .Title }}');
+    var postDate = moment({{ .Date }}, "YYYY-MM-DD HH:mm Z");
+    postHTML.innerHTML = postDate.format("LL");
+  }());
+</script>
+{{ end }}
 {{ end }}
 {{ partial "foot.html" . }}

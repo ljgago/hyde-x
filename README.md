@@ -55,64 +55,77 @@ theme = "hyde-x"
 paginate = 10
 
 [author]
-    name = "Your Name"
+  name = "Your Name"
 
 [permalinks]
-    # Optional. Change the permalink format for the 'post' content type.
-    # The format shown here is the same one Jekyll/Octopress uses by default.
-    post = "/blog/:year/:month/:day/:title/"
+  # Optional. Change the permalink format for the 'post' content type.
+  # The format shown here is the same one Jekyll/Octopress uses by default.
+  post = "/blog/:year/:month/:day/:title/"
 
 [taxonomies]
-    # Optional. Use if you want tags and lists.
-    category = "categories"
+  # Optional. Use if you want tags and lists.
+  category = "categories"
 
 #
 # All parameters below here are optional and can be mixed and matched.
 #
 [params]
-    # If false display full article contents in blog index.
-    # Otherwise show description and 'read on' link to individual blog post page.
-    # Default (if omitted) is true.
-    truncate = true
+  # If false display full article contents in blog index.
+  # Otherwise show description and 'read on' link to individual blog post page.
+  # Default (if omitted) is true.
+  truncate = true
 
-    # Used when a given page doesn't set its own.
-    defaultDescription = "Your default page description"
-    defaultKeywords = "your,default,page,keywords"
+  ## Parameters for locale
+  # languageText is used for moment.js
+  languageText = "es" # example spanish
+  # Add "minute read" string in you language (default: "Read On")
+  minuteRead = "minutos de lectura" # example spanish
+  # Add "Read On" string in you language
+  readOn = "Sigue leyendo" # example spanish
+  # You also change the language in you disqus account
+  disqusComments = "Comentarios" # example spanish
+  
+  # You also change the language in you disqus account
+  disqusComments = "Comentarios"
 
-    # Changes sidebar background and link/accent colours.
-    # See below for more colour options.
-    # This also works: "theme-base-08 layout-reverse", or just "layout-reverse".
-    theme = "theme-base-08"
+  # Used when a given page doesn't set its own.
+  defaultDescription = "Your default page description"
+  defaultKeywords = "your,default,page,keywords"
 
-    # Select a syntax highight.
-    # Check the static/css/highlight directory for options.
-    highlight = "sunburst"
+  # Changes sidebar background and link/accent colours.
+  # See below for more colour options.
+  # This also works: "theme-base-08 layout-reverse", or just "layout-reverse".
+  theme = "theme-base-08"
 
-    # Displays under the author name in the sidebar, keep it short.
-    # You can use markdown here.
-    tagline = "Your favourite quote or soundbite."
+  # Select a syntax highight.
+  # Check the static/css/highlight directory for options.
+  highlight = "sunburst"
 
-    # Text for the top menu link, which goes the root URL for the site.
-    # Default (if omitted) is "Blog".
-    home = "Blog"
+  # Displays under the author name in the sidebar, keep it short.
+  # You can use markdown here.
+  tagline = "Your favourite quote or soundbite."
 
-    # Metadata used to drive integrations.
-    googleAuthorship = "Your Google+ profile ID"
-    googleAnalytics = "Your Google Analytics tracking code"
-    gravatarHash = "MD5 hash of your Gravatar email address"
+  # Text for the top menu link, which goes the root URL for the site.
+  # Default (if omitted) is "Blog".
+  home = "Blog"
 
-    # Sidebar social links, these must be full URLs.
-    github = ""
-    bitbucket = ""
-    linkedin = ""
-    googleplus = ""
-    facebook = ""
-    twitter = ""
-    youtube = ""
+  # Metadata used to drive integrations.
+  googleAuthorship = "Your Google+ profile ID"
+  googleAnalytics = "Your Google Analytics tracking code"
+  gravatarHash = "MD5 hash of your Gravatar email address"
 
-    # Other social-like sidebar links
-    rss = false  # switch to true to enable RSS icon link
-    flattr = ""  # populate with your flattr uid
+  # Sidebar social links, these must be full URLs.
+  github = ""
+  bitbucket = ""
+  linkedin = ""
+  googleplus = ""
+  facebook = ""
+  twitter = ""
+  youtube = ""
+
+  # Other social-like sidebar links
+  rss = false  # switch to true to enable RSS icon link
+  flattr = ""  # populate with your flattr uid
 ```
 
 ### Built-in colour themes
@@ -131,6 +144,7 @@ Hyde-X provides 8 built-in colour themes by default, with the option to define m
 * Hugo makes it easy to override theme layout and behaviour, read about it [here](http://gohugo.io/themes/customizing).
 * Pagination is set to 10 items by default, change it by updating `paginate = 10` in your `config.toml`.
 * Set `truncate = false` in the `[params]` section of your `config.toml` to display full blog post contents in the index page, like the [base Hyde theme](https://github.com/poole/hyde) did.
+* In the disqus.com account, you can setting "Comments counter" language. Go to https://(you_disqus_name_account).disqus.com/admin/settings/ and you change the "Comment Count Link".
 
 ### Changes and enhancements from the original theme
 
@@ -144,6 +158,7 @@ Hyde-X provides 8 built-in colour themes by default, with the option to define m
 * Blog post list now contains only the post description, not the full contents.
 * Paginated blog listing.
 * [FontAwesome](http://fortawesome.github.io/Font-Awesome) social links.
+* Added moment.js (moment-with-locales.js) and parameters for locale.
 * ...many other small layout tweaks!
 
 ### Attribution
