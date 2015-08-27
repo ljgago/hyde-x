@@ -5,21 +5,21 @@
     {{ range $paginator.Pages }}
     <div class="post">
       <h1 class="post-title">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <a href="{{ .Permalink | relURL }}">{{ .Title }}</a>
       </h1>
-      <span class="post-date"><i class="fa fa-calendar-o"></i> <span id="{{ .Title }}"></span> &middot; {{ .ReadingTime }} {{ if isset .Site.Params "minuteRead" }}{{ .Site.Params.minuteRead }}{{else}}minute read{{end}}{{ if .Site.DisqusShortname }} &middot; <a href="{{ .Permalink }}#disqus_thread">{{ .Site.Params.disqusComments }}</a>{{ end }}
+      <span class="post-date"><i class="fa fa-calendar-o"></i> <span id="{{ .Title }}"></span> &middot; {{ .ReadingTime }} {{ if isset .Site.Params "minuteRead" }}{{ .Site.Params.minuteRead }}{{else}}minute read{{end}}{{ if .Site.DisqusShortname }} &middot; <a href="{{ .Permalink | relURL }}#disqus_thread">{{ .Site.Params.disqusComments }}</a>{{ end }}
       {{ if isset .Params "categories" }}
       <br/>
-      {{ range .Params.categories }}<a class="label" href="{{ "/categories/" | absURL }}{{ . | urlize }}">{{ . }}</a>{{ end }}
+      {{ range .Params.categories }}<a class="label" href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . }}</a>{{ end }}
       {{ end }}</span>
       {{ if eq .Site.Params.truncate false }}
       {{ .Content }}
       {{ else if .Description }}
       <p>{{ .Description }}</p><br>
-      <a href="{{ .Permalink }}">{{.Site.Params.readOn}} &rarr;</a>
+      <a href="{{ .Permalink | relURL }}">{{.Site.Params.readOn}} &rarr;</a>
       {{ else }}
       {{ .Summary }}<br>
-      {{ if .Truncated }}<a href="{{ .Permalink }}">{{ if isset .Site.Params "readOn"}}{{ .Site.Params.readOn }}{{ else }}Read On{{ end }} &rarr;</a>{{ end }}
+      {{ if .Truncated }}<a href="{{ .Permalink | relURL }}">{{ if isset .Site.Params "readOn"}}{{ .Site.Params.readOn }}{{ else }}Read On{{ end }} &rarr;</a>{{ end }}
       {{ end }}
     </div>
     {{ end }}
