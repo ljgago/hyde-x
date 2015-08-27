@@ -1,6 +1,6 @@
 {{ partial "head.html" . }}
 <div class="content container">
-<h2>Related articles: </h2>
+<h2>{{ if isset .Site.Params "relArticlesLang" }}{{.Site.Params.relArticlesLang}}{{else}}Related articles{{end}}: </h2>
   <ul class="posts">
     {{ range .Data.Pages }}
     {{ if eq .Type "post"}}
@@ -22,7 +22,7 @@
     moment.locale('{{ if isset .Site.Params "languageText" }}{{ .Site.Params.languageText }}{{ else }}us{{ end }}');
     var postHTML = document.getElementById('{{ .Title }}');
     var postDate = moment({{ .Date }}, "YYYY-MM-DD HH:mm Z");
-    postHTML.innerHTML = postDate.format("LL");
+    postHTML.innerHTML = postDate.format("L");
   }());
 </script>
 {{ end }}

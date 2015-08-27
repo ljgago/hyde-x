@@ -78,12 +78,14 @@ paginate = 10
   ## Parameters for locale
   # languageText is used for moment.js
   languageText = "es" # example spanish
-  # Add "minute read" string in you language (default: "Read On")
+  # Add "minute read" string in you language (default: "minute read")
   minuteRead = "minutos de lectura" # example spanish
   # Add "Read On" string in you language
-  readOn = "Sigue leyendo" # example spanish
+  readOn = "Sigue leyendo" # example spanish (default: "Read On")
   # You also change the language in you disqus account
-  disqusComments = "Comentarios" # example spanish
+  disqusComments = "Comentarios" # example spanish (default: "Comments")
+  # Text change language
+  relArticlesLang = "Artículos relacionados" # example spanish (default: "Related articles")
   
   # You also change the language in you disqus account
   disqusComments = "Comentarios"
